@@ -1,0 +1,18 @@
+server:
+  port: 8083
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:file:./data/stockmanager
+    username: root
+    password: 123456
+    initialization-mode: always
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    generate-sql: true
+  h2:
+    console:
+      enabled: true
+      path: /console
