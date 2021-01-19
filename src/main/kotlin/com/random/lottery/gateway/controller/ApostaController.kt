@@ -1,6 +1,7 @@
 package com.random.lottery.gateway.controller
 
 import com.random.lottery.dtos.ApostaDTO
+import com.random.lottery.dtos.EmailDTO
 import com.random.lottery.dtos.ErrorMessage
 import com.random.lottery.services.ApostaService
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,23 +16,23 @@ class ApostaController {
     @Autowired
     lateinit var apostaService: ApostaService
 
-    @GetMapping("/{email}")
-    fun getByEmail(@PathVariable email: String): ResponseEntity<Any> {
-        var aposta = this.apostaService.findByEmail(email)
+    @GetMapping("/email")
+    fun findByEmail(@RequestBody emailDTO: EmailDTO ): ResponseEntity<Any> {
+        var aposta = this.apostaService.findByEmail(emailDTO)
 
         return if (aposta != null)
             return ResponseEntity(aposta, HttpStatus.OK)
         else return ResponseEntity(
-            ErrorMessage("Aposta nao localizada", "Aposta ${email} nao localizada"),
+            ErrorMessage("Aposta nao localizada", "Aposta ${emailDTO.email} nao localizada"),
             HttpStatus.NOT_FOUND
         )
     }
 
 
     @PostMapping()
-    fun realizarAposta(@RequestBody email: String): ResponseEntity<Any> {
+    fun realizarAposta(@RequestBody emailDTO: EmailDTO): ResponseEntity<Any> {
 
-        val criarAposta = this.apostaService.realizarAposta(email)
+        val criarAposta = this.apostaService.realizarAposta(emailDTO)
 
         return ResponseEntity(criarAposta, HttpStatus.CREATED)
     }
