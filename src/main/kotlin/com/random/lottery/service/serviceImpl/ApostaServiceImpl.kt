@@ -1,6 +1,7 @@
 package com.random.lottery.service.serviceImpl
 
 import com.random.lottery.model.Aposta
+import com.random.lottery.model.ApostaDTO
 import com.random.lottery.repository.ApostasRepository
 import com.random.lottery.service.ApostaService
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,22 +15,31 @@ class ApostaServiceImpl : ApostaService {
     @Autowired
     lateinit var apostasRepository: ApostasRepository
 
-    override fun realizarAposta(email: String): Aposta {
+    override fun realizarAposta(email: String): ApostaDTO {
         val numero = Random.nextLong()
-        val aposta = Aposta(null, email, numero)
-
-        return apostasRepository.save(aposta)
+        var aposta = Aposta(null, email, numero)
+        aposta = apostasRepository.save(aposta)
+        return ApostaDTO(aposta.email, aposta.numeroAposta)
     }
 
 
-    override fun getByEmail(email: String): Aposta? {
+    override fun getByEmail(email: String): ApostaDTO? {
 
-        return apostasRepository.findByEmail(email)
+        val aposta =  apostasRepository.findByEmail(email)
+        return ApostaDTO(aposta.email, aposta.numeroAposta )
     }
 
-    override fun getAll(): List<Aposta> {
+    override fun getAll(): List<ApostaDTO> {
 
-        return this.apostasRepository.findAll().toList()
+        val apostas = apostasRepository.findAll().toList()
+        val lista = ArrayList<ApostaDTO>()
+
+        for (aposta in apostas){
+
+            val apostaDTO = ApostaDTO(aposta.email, aposta.numeroAposta)
+            lista.add(apostaDTO)
+        }
+        return lista
     }
 
     override fun count(): Long = this.apostasRepository.count()
