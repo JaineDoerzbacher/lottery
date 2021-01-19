@@ -31,7 +31,7 @@ class ApostaServiceImpl : ApostaService {
 
     override fun getAll(): List<ApostaDTO> {
 
-        val apostas = apostasRepository.findAll().toList()
+        val apostas = apostasRepository.findAll().toList().sortedBy { it.email }
         val lista = ArrayList<ApostaDTO>()
 
         for (aposta in apostas){
