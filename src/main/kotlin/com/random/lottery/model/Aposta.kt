@@ -8,7 +8,7 @@ data class Aposta(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long?,
     val email: String,
     val numeroAposta: Long
 )

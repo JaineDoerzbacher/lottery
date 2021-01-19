@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 @Service
 interface ApostaService {
 
-    fun create(aposta: Aposta)
+    fun realizarAposta(email: String): Aposta
     fun getByEmail(email: String): Aposta?
     fun getAll(): List<Aposta>
     fun count(): Long
