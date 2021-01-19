@@ -1,9 +1,7 @@
-FROM openjdk:11
-MAINTAINER jaine
-WORKDIR /opt/app
+FROM alpine:latest
+EXPOSE 8083
+RUN apk --update --no-cache add ca-certificates openjdk11
+RUN mkdir /app
+ADD lottery*.jar /app/lottery.jar
 
-
-ARG JAR_FILE=build/libs/lottery-0.0.1-SNAPSHOT.jar
-
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/lottery.jar"]

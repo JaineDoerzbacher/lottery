@@ -2,17 +2,14 @@ server:
   port: 8083
 spring:
   datasource:
-    driverClassName: org.h2.Driver
-    url: jdbc:h2:file:./data/stockmanager
-    username: root
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://bd:5432/lottery-db
+    username: jaine
     password: 123456
     initialization-mode: always
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQL10Dialect
     generate-sql: true
-  h2:
-    console:
-      enabled: true
-      path: /console

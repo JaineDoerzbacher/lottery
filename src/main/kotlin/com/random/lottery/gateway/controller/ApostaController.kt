@@ -1,9 +1,8 @@
-package com.random.lottery.controller
+package com.random.lottery.gateway.controller
 
-import com.random.lottery.model.Aposta
-import com.random.lottery.model.ApostaDTO
-import com.random.lottery.model.ErrorMessage
-import com.random.lottery.service.ApostaService
+import com.random.lottery.dtos.ApostaDTO
+import com.random.lottery.dtos.ErrorMessage
+import com.random.lottery.services.ApostaService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -18,7 +17,7 @@ class ApostaController {
 
     @GetMapping("/{email}")
     fun getByEmail(@PathVariable email: String): ResponseEntity<Any> {
-        var aposta = this.apostaService.getByEmail(email)
+        var aposta = this.apostaService.findByEmail(email)
 
         return if (aposta != null)
             return ResponseEntity(aposta, HttpStatus.OK)

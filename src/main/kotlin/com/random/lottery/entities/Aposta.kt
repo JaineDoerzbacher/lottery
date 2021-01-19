@@ -1,9 +1,9 @@
-package com.random.lottery.model
+package com.random.lottery.entities
 
 import javax.persistence.*
 
 @Entity
-@Table(name = "APOSTAS")
+@Table(name = "APOSTA")
 data class Aposta(
 
     @Id
