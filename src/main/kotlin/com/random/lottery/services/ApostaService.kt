@@ -21,7 +21,7 @@ interface ApostaService {
      * @param emailDTO [EmailDTO] - um email
      * @return [ApostaDTO]? - uma aposta caso encontrada
      */
-    fun findByEmail(emailDTO: EmailDTO): ApostaDTO?
+    fun findByEmail(emailDTO: EmailDTO): List<ApostaDTO>
 
     /**
      * Funçao que lista todas as apostas registradas

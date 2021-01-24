@@ -23,10 +23,17 @@ class ApostaServiceImpl : ApostaService {
     }
 
 
-    override fun findByEmail(emailDTO: EmailDTO): ApostaDTO? {
+    override fun findByEmail(emailDTO: EmailDTO): List<ApostaDTO> {
 
-        val aposta =  apostaRepository.findByEmail(emailDTO.email)
-        return ApostaDTO(aposta.email, aposta.numeroAposta )
+        val apostas = apostaRepository.findByEmail(emailDTO.email)
+        val lista = ArrayList<ApostaDTO>()
+        for (aposta in apostas) {
+            val x = ApostaDTO(aposta.email, aposta.numeroAposta)
+            lista.add(x)
+
+        }
+
+        return lista
     }
 
     override fun getAll(): List<ApostaDTO> {
@@ -34,7 +41,7 @@ class ApostaServiceImpl : ApostaService {
         val apostas = apostaRepository.findAll().toList().sortedBy { it.email }
         val lista = ArrayList<ApostaDTO>()
 
-        for (aposta in apostas){
+        for (aposta in apostas) {
 
             val apostaDTO = ApostaDTO(aposta.email, aposta.numeroAposta)
             lista.add(apostaDTO)

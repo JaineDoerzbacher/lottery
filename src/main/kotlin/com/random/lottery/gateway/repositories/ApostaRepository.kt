@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository
 interface ApostaRepository : JpaRepository<Aposta, Long> {
 
     @Query("select a from Aposta a where a.email = :email ")
-    fun findByEmail (@Param("email") email: String) : Aposta
+    fun findByEmail (@Param("email") email: String) : List<Aposta>
+
 
 }
