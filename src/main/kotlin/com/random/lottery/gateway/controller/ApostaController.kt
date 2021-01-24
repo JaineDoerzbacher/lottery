@@ -22,24 +22,17 @@ class ApostaController {
     lateinit var emailRequestValidator: EmailRequestValidator
 
     @GetMapping("/email")
-    fun findByEmail(@RequestBody emailDTO: EmailDTO): ResponseEntity<Any> {
-        emailRequestValidator.verifica(emailDTO)
+    fun findByEmail(@RequestBody emailDTO: EmailDTO): ResponseEntity<List<ApostaDTO>> {
 
+        emailRequestValidator.verifica(emailDTO)
         val aposta = this.apostaService.findByEmail(emailDTO)
 
-        return if (aposta != null) {
-            ResponseEntity(aposta, HttpStatus.OK)
-        } else {
-            ResponseEntity(
-                ErrorMessage("Aposta nao localizada", "Aposta ${emailDTO.email} nao localizada"),
-                HttpStatus.NOT_FOUND
-            )
-        }
+        return ResponseEntity(aposta, HttpStatus.OK)
+
     }
 
-
     @PostMapping()
-    fun realizarAposta(@RequestBody emailDTO: EmailDTO): ResponseEntity<Any> {
+    fun realizarAposta(@RequestBody emailDTO: EmailDTO): ResponseEntity<ApostaDTO> {
 
         emailRequestValidator.verifica(emailDTO)
 

@@ -3,6 +3,7 @@ package com.random.lottery.services.serviceImpl
 import com.random.lottery.dtos.ApostaDTO
 import com.random.lottery.dtos.EmailDTO
 import com.random.lottery.entities.Aposta
+import com.random.lottery.exceptions.EntityNotFoundException
 import com.random.lottery.gateway.repositories.ApostaRepository
 import com.random.lottery.services.ApostaService
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,11 +27,13 @@ class ApostaServiceImpl : ApostaService {
     override fun findByEmail(emailDTO: EmailDTO): List<ApostaDTO> {
 
         val apostas = apostaRepository.findByEmail(emailDTO.email)
+        if (apostas.isEmpty()) {
+            throw EntityNotFoundException("E-mail não encontrado")
+        }
         val lista = ArrayList<ApostaDTO>()
         for (aposta in apostas) {
             val x = ApostaDTO(aposta.email, aposta.numeroAposta)
             lista.add(x)
-
         }
 
         return lista
