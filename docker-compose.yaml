@@ -1,24 +1,25 @@
-version: "3.8"
-services:
-  bd:
-    image: postgres
-    container_name: lottery-db
-    environment:
-      POSTGRES_USER: jaine
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_DB: lottery-db
-    ports:
-    - 5432:5432
-    volumes:
-    - database-data:/var/lib/postgresql/data
-  app:
-    build:
-      context: build/libs
-      dockerfile: ../../Dockerfile
-      network: host
-    ports:
-    - 8083:8083
-    depends_on:
-      - bd
-volumes:
-  database-data:
+
+  version: "3.8"
+  services:
+    bd:
+      image: postgres
+      container_name: lottery-db
+      environment:
+        POSTGRES_USER: jaine
+        POSTGRES_PASSWORD: 123456
+        POSTGRES_DB: lottery-db
+      ports:
+      - 5432:5432
+      volumes:
+      - database-data:/var/lib/postgresql/data
+    app:
+      build:
+        context: build/libs
+        dockerfile: ../../Dockerfile
+        network: host
+      ports:
+      - 8083:8083
+      depends_on:
+        - bd
+  volumes:
+    database-data:

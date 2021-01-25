@@ -1,5 +1,4 @@
 package com.random.lottery.gateway.controller
-
 import com.random.lottery.dtos.ErrorMessage
 import com.random.lottery.exceptions.EntityNotFoundException
 import org.springframework.http.HttpStatus

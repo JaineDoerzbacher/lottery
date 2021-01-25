@@ -15,3 +15,5 @@ interface ApostaRepository : JpaRepository<Aposta, Long> {
 
 
 }
+
+

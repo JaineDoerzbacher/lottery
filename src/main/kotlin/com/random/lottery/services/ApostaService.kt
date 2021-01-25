@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service
 /*
  *São serviços relacionados a Aposta
  */
-@Service
 interface ApostaService {
 
     /**
